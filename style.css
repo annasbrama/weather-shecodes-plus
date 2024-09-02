@@ -44,7 +44,6 @@ body {
     background: rgba(255, 255, 255, .3);
     padding: 0.5rem 8rem;
     margin-top: 1rem;
-    /* padding-left: calc(1rem * 3.5); */
     border-radius: 100px;
     transition: background .5s;
     text-align: center;
@@ -54,7 +53,7 @@ body {
     background: #fff;
 }
 
-.card input[type="submit"] {
+.card button {
     background: #3d2e4f;
     color: #fff;
     padding: 0.5rem 1rem;
@@ -67,7 +66,7 @@ body {
     cursor: pointer;
 }
 
-.card input[type="submit"]:hover {
+.card button:hover {
     background-color: #200726;
 }
 
@@ -85,6 +84,14 @@ body {
 .weather-cities p {
     margin-top: 1rem;
     line-height: 1.3rem;
+}
+
+.weather-cities .datetime {
+    color: #000;
+}
+
+.weather-cities .datetime:hover {
+    color: #000;
 }
 
 .weather-cities span {
@@ -121,14 +128,47 @@ footer a:hover {
     color: #A192A6;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1270px) {
+
+    .card {
+        min-width: 40vw;
+        margin: 0 auto;
+    }
+
+    .search {
+        margin: 0 auto;
+    }
+
+    .content-weather {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .card input[type="text"] {
+        padding: 0.5rem 4.5rem;
+    }
+
+    .card button {
+        margin-top: 0.7rem;
+        padding: 0.5rem 7.1rem;
+    }
+}
+
+@media (max-width: 860px) {
 
     body {
         padding: 2rem 0;
     }
 
+    .search {
+        margin: 0 auto;
+    }
+
     .card {
         width: 280px;
+        min-height: 45vh;
         padding: 2rem;
         margin: 0 auto;
     }
@@ -138,8 +178,10 @@ footer a:hover {
         margin-right: 2rem;
     }
 
-    .card input[type="submit"] {
+    .card button {
         margin-right: 2rem;
+        margin-top: 0.7rem;
         padding: 0.5rem 5.2rem;
     }
+
 }
