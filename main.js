@@ -7,8 +7,8 @@ function displayTemperature(response) {
     cityElement.innerHTML = response.data.city;
     temperatureElement.innerHTML = `${temperature}°C`;
     descriptionElement.innerHTML = ` ${formatDate(currentDate)}, ${response.data.condition.description}<br>
-        Humidity: <strong>${response.data.temperature.humidity}%</strong>, Wind <br>
-        <strong>${response.data.wind.speed}km/h</strong>`;
+        Humidity: <strong>${response.data.temperature.humidity}%</strong>,<br>
+        Wind: <strong>${response.data.wind.speed}km/h</strong>`;
 }
 
 
