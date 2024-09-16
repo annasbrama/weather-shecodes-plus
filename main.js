@@ -2,9 +2,13 @@ function displayTemperature(response) {
     let temperatureElement = document.querySelector(".weather");
     let temperature = Math.round(response.data.temperature.current);
     let cityElement = document.querySelector(".current-city");
-
+    let descriptionElement = document.querySelector(".content-weather p");
+    
     cityElement.innerHTML = response.data.city;
     temperatureElement.innerHTML = `${temperature}°C`;
+    descriptionElement.innerHTML = ` ${formatDate(currentDate)}, ${response.data.condition.description}<br>
+        Humidity: <strong>${response.data.temperature.humidity}%</strong>, Wind <br>
+        <strong>${response.data.wind.speed}km/h</strong>`;
 }
 
 
