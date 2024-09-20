@@ -10,13 +10,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(666px at 0.4% 48%, rgb(202, 204, 227) 0%, rgb(89, 89, 99) 97.5%) no-repeat center center fixed;
+    background: radial-gradient(666px at 0.4% 48%, #d5bdaf 0%, #f5ebe0 97.5%) no-repeat center center fixed;
     background-size: cover;
 }
 
 .card {
     width: 40vw;
-    background: rgba(255, 255, 255, .15);
+    background: #e3d5ca;
     padding: 3rem;
     border-radius: 10px;
     position: relative;
@@ -26,8 +26,8 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, .15);
-    transform: rotate(-5deg);
+    background: #e3d5ca80;
+    transform: rotate(-3deg);
     border-radius: 10px;
     z-index: -1;
 }
