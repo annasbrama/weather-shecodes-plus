@@ -1,41 +1,26 @@
-function displayTemperature(response) {
-    let temperatureElement = document.querySelector(".weather");
-    let temperature = Math.round(response.data.temperature.current);
-    let cityElement = document.querySelector(".current-city");
-    let descriptionElement = document.querySelector(".content-weather p");
-    
+function refreshWeather(response) {
+    let temperatureElement = document.querySelector("#temperature");
+    let temperature = response.data.temperature.current;
+    let cityElement = document.querySelector("#city");
+    let descriptionElement = document.querySelector("#description");
+    let humidityElement = document.querySelector("#humidity");
+    let windSpeedElement = document.querySelector("#wind");
+    let timeElement = document.querySelector(".datetime");
+    let date = new Date(response.data.time * 1000);
+    let iconElement = document.querySelector(".icon");
+
     cityElement.innerHTML = response.data.city;
-    temperatureElement.innerHTML = `${temperature}°C`;
-    descriptionElement.innerHTML = ` ${formatDate(currentDate)}, ${response.data.condition.description}<br>
-        Humidity: <strong>${response.data.temperature.humidity}%</strong>,<br>
-        Wind: <strong>${response.data.wind.speed}km/h</strong>`;
-}
-
-
-function search(event) {
-    event.preventDefault();
-    let searchInputElement = document.querySelector(".input");
-    let city = searchInputElement.value;
-
-    let apiKey = "e03483d732fba98f417tb9d7ed1ao1d8"; 
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-
-    axios.get(apiUrl).then(displayTemperature);
+    timeElement.innerHTML = formatDate(date);
+    descriptionElement.innerHTML = response.data.condition.description;
+    humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+    windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
+    temperatureElement.innerHTML = `${Math.round(temperature)}°C`;
+    iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
 }
 
 function formatDate(date) {
     let minutes = date.getMinutes();
     let hours = date.getHours();
-    let day = date.getDay();
-
-    if (minutes < 10) {
-        minutes = `0${minutes}`;
-    }
-
-    if (hours < 10) {
-        hours = `0${hours}`;
-    }
-
     let days = [
         "Sunday",
         "Monday",
@@ -45,15 +30,34 @@ function formatDate(date) {
         "Friday",
         "Saturday",
     ];
-
-    let formattedDay = days[day];
-    return `${formattedDay} ${hours}:${minutes}`;
+    let day = days[date.getDay()];
+    if (minutes < 10) {
+        minutes = `0${minutes}`;
+    }
+    return `${day} ${hours}:${minutes}`;
 }
 
-let searchForm = document.querySelector('form');
-searchForm.addEventListener("submit", search);
+function searchCity(city) {
+    let apiKey = "e03483d732fba98f417tb9d7ed1ao1d8";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(refreshWeather).catch(handleError);
+}
 
-let currentDateELement = document.querySelector(".datetime");
-let currentDate = new Date();
+function handleSearchSubmit(event) {
+    event.preventDefault();
+    let searchInput = document.querySelector(".input");
+    searchCity(searchInput.value);
+}
 
-currentDateELement.innerHTML = formatDate(currentDate);
+function handleError(error) {
+    console.error("ERROR", error);
+    alert("Unable to obtain weather data. Please try again.");
+}
+
+function init() {
+    let searchFormElement = document.querySelector("form");
+    searchFormElement.addEventListener("submit", handleSearchSubmit);
+    searchCity("São Paulo");
+}
+
+init();

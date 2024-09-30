@@ -21,15 +21,17 @@
             </div>
             <section class="content-weather">
                 <div class="weather-cities">
-                    <h1 class="current-city">San Francisco</h1>
-                    <p><span class="datetime">Sunday 19:11</span>, few clouds <br>
-                        Humidity: <strong>74%</strong>, <br>
-                        Wind: <strong>11.32km/h</strong>
+                    <h1 id="city"></h1>
+                    <p><span class="datetime"> </span>, <span id="description"></span> <br>
+                        Humidity: <strong id="humidity"></strong>, <br>
+                        Wind: <strong id="wind"></strong>
                     </p>
                 </div>
                 <div class="weather">
-                    19°C
+                    <div class="icon"></div>
+                    <div id="temperature">°C</div>
                 </div>
+                <div class="weather-forecast" id="forecast"></div>
             </section>
         </div>
         <footer>
